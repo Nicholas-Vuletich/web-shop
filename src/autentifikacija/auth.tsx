@@ -15,7 +15,7 @@ export const Auth: React.FC = () => {
         <div>
             <input placeholder="E-mail..." onChange={(e) => setEmail(e.target.value)}/>
             <input placeholder="Password..." type="password" onChange={(e) => setpassword(e.target.value)}/>
-            <button onClick={signIn}>Prijava</button>
+            <button onClick={signIn}>Registracija</button>
         </div>
     )
 };

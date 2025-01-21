@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDu2BHGFdN8qDyfMO6evVkhtEeF9hFYkWA",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "web-shop-91204.firebaseapp.com",
   projectId: "web-shop-91204",
   storageBucket: "web-shop-91204.firebasestorage.app",
