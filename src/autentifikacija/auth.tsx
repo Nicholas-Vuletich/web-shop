@@ -1,23 +1,74 @@
 import React, { useState } from 'react';
 import { auth } from '../firebaseConfig'; 
-import { createUserWithEmailAndPassword } from 'firebase/auth'; 
+import { createUserWithEmailAndPassword, fetchSignInMethodsForEmail} from 'firebase/auth'; 
 
 export const Auth: React.FC = () => {
 
     const [email, setEmail] = useState("");
-    const [password, setpassword] = useState("");
+    const [password, setPassword] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [userCreated, setUserCreated] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    const signIn = async () => {
-    await createUserWithEmailAndPassword(auth, email, password)  
-    }
+    const signUp = async () => {
+        try {
+          const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+            if (signInMethods.length > 0) {
+            setError("Ovaj email je već registriran.");
+          } else {
+            await createUserWithEmailAndPassword(auth, email, password);
+            setUserCreated(true); 
+            setError("");  
+          }
+        } catch (error) {
+          console.error("Greška prilikom registracije:", error);
+          setError("Postoji korisnik sa ovim e-mailom.");
+        }
+      };
 
     return (
         <div>
-            <input placeholder="E-mail..." onChange={(e) => setEmail(e.target.value)}/>
-            <input placeholder="Password..." type="password" onChange={(e) => setpassword(e.target.value)}/>
-            <button onClick={signIn}>Registracija</button>
+          <nav>
+            {}
+            {userCreated && (
+              <div>
+                <p>Dobrodošao, {firstName} {lastName}!</p>
+              </div>
+            )}
+          </nav>
+    
+          {!userCreated ? (
+            <div>
+              <input
+                placeholder="E-mail..."
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                placeholder="Password..."
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <input
+                placeholder="First Name..."
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <input
+                placeholder="Last Name..."
+                onChange={(e) => setLastName(e.target.value)}
+              />
+              <button onClick={signUp}>Registracija</button>
+            </div>
+            )
+         : (
+            <div>
+              <p>Registracija je uspješno završena!</p>
+            </div>
+          )}
+          {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
-    )
-};
+      );
+    };
 
 export default Auth;
+
