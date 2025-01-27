@@ -11,7 +11,17 @@ export const Auth: React.FC = () => {
     const [userCreated, setUserCreated] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
+    const isValidEmail = (email: string): boolean => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Provjerava ispravan format e-maila
+      return emailRegex.test(email);
+    };
+
     const signUp = async () => {
+      if (!isValidEmail(email)) {
+        setError("Unesite ispravan e-mail.");
+        return;
+      }
+
         try {
           const signInMethods = await fetchSignInMethodsForEmail(auth, email);
             if (signInMethods.length > 0) {
@@ -41,6 +51,14 @@ export const Auth: React.FC = () => {
           {!userCreated ? (
             <div>
               <input
+                placeholder="First Name..."
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <input
+                placeholder="Last Name..."
+                onChange={(e) => setLastName(e.target.value)}
+              />
+              <input
                 placeholder="E-mail..."
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -48,14 +66,6 @@ export const Auth: React.FC = () => {
                 placeholder="Password..."
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
-              />
-              <input
-                placeholder="First Name..."
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-              <input
-                placeholder="Last Name..."
-                onChange={(e) => setLastName(e.target.value)}
               />
               <button onClick={signUp}>Registracija</button>
             </div>
