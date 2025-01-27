@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { auth } from '../firebaseConfig'; 
-import { createUserWithEmailAndPassword, fetchSignInMethodsForEmail} from 'firebase/auth'; 
+import { createUserWithEmailAndPassword, fetchSignInMethodsForEmail} from 'firebase/auth';
+import './auth.css';
+
 
 export const Auth: React.FC = () => {
 
@@ -38,7 +40,7 @@ export const Auth: React.FC = () => {
       };
 
     return (
-        <div>
+        <div className='auth-div'>
           <nav>
             {}
             {userCreated && (
@@ -50,19 +52,20 @@ export const Auth: React.FC = () => {
     
           {!userCreated ? (
             <div>
-              <input
-                placeholder="First Name..."
+              <h2 className="form-title">Registracija</h2>
+              <input className='form-input'
+                placeholder="Ime..."
                 onChange={(e) => setFirstName(e.target.value)}
               />
-              <input
-                placeholder="Last Name..."
+              <input className='form-input'
+                placeholder="Prezime..."
                 onChange={(e) => setLastName(e.target.value)}
               />
-              <input
+              <input className='form-input'
                 placeholder="E-mail..."
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <input
+              <input className='form-input'
                 placeholder="Password..."
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}

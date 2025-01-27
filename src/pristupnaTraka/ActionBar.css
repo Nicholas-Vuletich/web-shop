@@ -1,0 +1,36 @@
+.action-bar {
+    width: 100%;
+    height: 50px; /* Malo manje od navigacije */
+    background-color: #444; /* Sličan ton kao navigacija */
+    display: flex;
+    justify-content: flex-end; /* Dugmad s desne strane */
+    align-items: center; /* Vertikalno centrirano */
+    padding: 0 20px; /* Dovoljno prostora sa strane */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Lagana sjena ispod */
+  }
+  
+  .buttons-container {
+    display: flex;
+    gap: 10px; /* Razmak između gumbova */
+  }
+  
+  .action-button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    background-color: #007bff; /* Plava boja gumba */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .action-button:last-child {
+    margin-right: 2.5rem; 
+  }
+  
+  .action-button:hover {
+    background-color: #0056b3; 
+  }
+  
+  
