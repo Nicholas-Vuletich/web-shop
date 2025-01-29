@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { auth } from '../firebaseConfig'; 
+import { auth } from '../../firebaseConfig'; 
 import { createUserWithEmailAndPassword, fetchSignInMethodsForEmail} from 'firebase/auth';
-import './auth.css';
+import './reg.css';
 
 
 export const Auth: React.FC = () => {
