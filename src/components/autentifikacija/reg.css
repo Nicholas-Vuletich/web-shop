@@ -1,16 +1,23 @@
 /* Glavni kontejner forme */
 .auth-div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #333;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 2rem auto;
-    color: #fff;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centriranje forme vertikalno */
+  background-color: #333;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  margin-top: 60px;
+  justify-content: flex-start;
+  padding-top: 50px; /* Možeš prilagoditi po potrebi */
+  /* Postavljanje visine i širine */
+  width: 100vw;  /* Prekriva cijelu širinu */
+  height: calc(100vh - 60px); /* Oduzima visinu navigacije (ako je npr. 60px) */
+  margin: 0;
+}
+
   
   /* Naslov forme */
   .form-title {
