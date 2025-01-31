@@ -1,13 +1,17 @@
 .action-bar {
-    width: 100%;
-    height: 50px; /* Malo manje od navigacije */
-    background-color: #444; /* Sličan ton kao navigacija */
-    display: flex;
-    justify-content: flex-end; /* Dugmad s desne strane */
-    align-items: center; /* Vertikalno centrirano */
-    padding: 0 20px; /* Dovoljno prostora sa strane */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Lagana sjena ispod */
-  }
+  width: 100%; /* 100% umjesto 100vw da izbjegnemo horizontalni scroll */
+  height: 50px; /* Visina trake */
+  background-color: #444; /* Boja pozadine */
+  display: flex;
+  justify-content: flex-end; /* Dugmad idu desno */
+  align-items: center; /* Vertikalno centriranje */
+  padding: 0 20px; /* Prostor sa strane */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Lagana sjena */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Osigurava da je iznad ostalog sadržaja */
+  box-sizing: border-box; /* Sprečava da padding utječe na širinu */
+}
   
   .buttons-container {
     display: flex;
@@ -33,4 +37,39 @@
     background-color: #0056b3; 
   }
   
+  .cart-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 20px;
+  }
+  
+  .cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 50%;
+  }
+  
+  .add-to-cart-button {
+    background-color: #28a745; /* Zelena boja */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  .add-to-cart-button:hover {
+    background-color: #218838; /* Tamnija zelena na hover */
+  }
   
