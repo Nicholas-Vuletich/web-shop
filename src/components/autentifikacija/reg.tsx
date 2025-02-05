@@ -62,7 +62,7 @@ export const Auth: React.FC = () => {
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit">Registracija</button>
+                <button className="auth-button" type="submit">Registracija</button>
             </form>
             {error && <p className="error">{error}</p>}
             {successMessage && <p className="success">{successMessage}</p>}

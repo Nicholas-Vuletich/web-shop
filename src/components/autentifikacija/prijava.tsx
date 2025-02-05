@@ -45,7 +45,7 @@ const SignIn: React.FC = () => {
                     placeholder="Lozinka..."
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button type="submit">Prijava</button>
+                <button className="auth-button" type="submit">Prijava</button>
             </form>
             {error && <p className="error">{error}</p>}
             {successMessage && <p className="success">{successMessage}</p>}

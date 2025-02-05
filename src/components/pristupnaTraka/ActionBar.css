@@ -73,3 +73,25 @@
     background-color: #218838; /* Tamnija zelena na hover */
   }
   
+  .logout-btn {
+    background-color: #ff4d4d; /* Crvena boja za odjavu */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-left: 10px; /* Dodan razmak između imena i gumba */
+  }
+  
+  .logout-btn:hover {
+    background-color: #cc0000; /* Tamnija crvena na hover */
+    transform: scale(1.05); /* Lagano povećanje */
+  }
+  
+  .logout-btn:active {
+    background-color: #a80000; /* Još tamnija nijansa kad je kliknuto */
+    transform: scale(0.95); /* Malo smanjenje */
+  }
+  
