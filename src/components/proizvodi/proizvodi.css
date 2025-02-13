@@ -88,3 +88,54 @@
       max-width: 300px; /* Ograniči širinu kako ne bi bio preširok */
     }
   }
+
+  .paginacija {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .paginacija button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+  }
+  
+  .paginacija button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .paginacija button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .broj-stranice {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  
+  .broj-stranice:hover {
+    background: #007bff;
+    color: white;
+  }
+  
+  .aktivna-stranica {
+    background: #0056b3;
+    color: white;
+    font-weight: bold;
+    pointer-events: none;
+  }

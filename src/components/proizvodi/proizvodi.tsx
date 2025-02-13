@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, limit, startAfter } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../../firebaseConfig";
 import "./proizvodi.css";
@@ -9,52 +9,93 @@ interface Proizvod {
   naziv: string;
   opis: string;
   cijena: number;
-  slikaPath?: string; // Dodana provjera ako `slikaPath` ne postoji
+  slikaPath?: string;
   slikaURL?: string;
 }
 
 const Proizvodi: React.FC = () => {
   const [proizvodi, setProizvodi] = useState<Proizvod[]>([]);
   const [loading, setLoading] = useState(true);
+  const [lastDoc, setLastDoc] = useState<any>(null);
+  const [trenutnaStranica, setTrenutnaStranica] = useState(1);
+  const [ukupanBrojProizvoda, setUkupanBrojProizvoda] = useState(0);
+
+  const proizvodiPoStranici = 6;
+  const ukupnoStranica = Math.ceil(ukupanBrojProizvoda / proizvodiPoStranici);
 
   useEffect(() => {
-    const fetchProizvodi = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "Suplementi"));
+    const fetchUkupanBrojProizvoda = async () => {
+      const querySnapshot = await getDocs(collection(db, "Suplementi"));
+      setUkupanBrojProizvoda(querySnapshot.size);
+    };
+
+    fetchUkupanBrojProizvoda();
+  }, []);
+
+  const fetchProizvodi = async (page = 1) => {
+    setLoading(true);
+    try {
+      let proizvodiQuery = query(
+        collection(db, "Suplementi"),
+        orderBy("naziv"),
+        limit(proizvodiPoStranici)
+      );
+  
+      if (page > 1 && lastDoc) {
+        proizvodiQuery = query(proizvodiQuery, startAfter(lastDoc));
+      }
+  
+      const querySnapshot = await getDocs(proizvodiQuery);
+  
+      if (!querySnapshot.empty) {
+        setLastDoc(querySnapshot.docs[querySnapshot.docs.length - 1]);
+  
         const proizvodiData = await Promise.all(
           querySnapshot.docs.map(async (doc) => {
             const data = doc.data() as Proizvod;
-
-            let slikaURL = "";
-            if (data.slikaURL) {
-              let storagePath = data.slikaURL;
-            
-              if (storagePath.startsWith("gs://")) {
-                storagePath = storagePath.split("/").slice(3).join("/"); 
-              }
-            
+            let slikaURL = data.slikaURL || "";
+  
+            if (data.slikaURL?.startsWith("gs://")) {
               try {
+                // Pretvaranje `gs://` putanje u relativnu putanju za Firebase Storage
+                const storagePath = data.slikaURL.replace("gs://web-shop1-ab141.firebasestorage.app/", "");
+  
                 const imageRef = ref(storage, storagePath);
                 slikaURL = await getDownloadURL(imageRef);
               } catch (error) {
                 console.error("Greška pri dohvaćanju slike:", error);
               }
             }
-            
+  
             return { ...data, id: doc.id, slikaURL };
           })
         );
-
+  
         setProizvodi(proizvodiData);
-      } catch (error) {
-        console.error("Greška pri dohvaćanju proizvoda:", error);
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (error) {
+      console.error("Greška pri dohvaćanju proizvoda:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
 
-    fetchProizvodi();
-  }, []);
+  useEffect(() => {
+    fetchProizvodi(trenutnaStranica);
+  }, [trenutnaStranica]);
+
+  const handleNextPage = () => {
+    if (trenutnaStranica < ukupnoStranica) {
+      setTrenutnaStranica((prev) => prev + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (trenutnaStranica > 1) {
+      setTrenutnaStranica((prev) => prev - 1);
+    }
+  };
 
   if (loading) {
     return <p>Učitavanje proizvoda...</p>;
@@ -81,9 +122,28 @@ const Proizvodi: React.FC = () => {
           <p className="nema-proizvoda">Nema dostupnih proizvoda.</p>
         )}
       </ul>
+
+      <div className="paginacija">
+        <button onClick={handlePrevPage} disabled={trenutnaStranica === 1}>
+          Prethodna
+        </button>
+
+        {[...Array(ukupnoStranica)].map((_, index) => (
+          <button
+            key={index + 1}
+            className={`broj-stranice ${trenutnaStranica === index + 1 ? "aktivna-stranica" : ""}`}
+            onClick={() => setTrenutnaStranica(index + 1)}
+          >
+            {index + 1}
+          </button>
+        ))}
+
+        <button onClick={handleNextPage} disabled={trenutnaStranica >= ukupnoStranica}>
+          Sljedeća
+        </button>
+      </div>
     </div>
   );
-  
 };
 
 export default Proizvodi;
