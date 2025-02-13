@@ -1,0 +1,90 @@
+/* Glavni kontejner za proizvode */
+.proizvodi-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Naslov proizvoda */
+  .proizvodi-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Lista proizvoda */
+  .proizvodi-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dva proizvoda u jednom redu */
+    gap: 20px; /* Razmak između proizvoda */
+    justify-content: center;
+    padding: 0;
+  }
+  
+  .proizvod-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    max-width: 300px; /* Povećaj veličinu proizvoda */
+    background-color: #f9f9f9;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .proizvod-item:hover {
+    transform: scale(1.05); /* Efekt povećanja kad se prijeđe mišem */
+  }
+  
+  .proizvod-image {
+    width: 100%;
+    height: auto;
+    max-height: 250px; /* Ograniči visinu slike */
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  /* Naziv proizvoda */
+  .proizvod-name {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  /* Opis proizvoda */
+  .proizvod-description {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  .proizvod-price {
+    font-size: 18px;
+    font-weight: bold;
+    color: green;
+  }
+  
+  /* Poruka kada slika nije dostupna */
+  .slika-nedostupna {
+    font-size: 14px;
+    color: red;
+  }
+  
+  /* Poruka kada nema dostupnih proizvoda */
+  .nema-proizvoda {
+    font-size: 18px;
+    color: #888;
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .proizvodi-list {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr); /* 1 proizvod po redu */
+      place-items: center; /* Centriranje proizvoda */
+    }
+  
+    .proizvod-item {
+      width: 100%; /* Proizvod zauzima cijelu širinu */
+      max-width: 300px; /* Ograniči širinu kako ne bi bio preširok */
+    }
+  }
