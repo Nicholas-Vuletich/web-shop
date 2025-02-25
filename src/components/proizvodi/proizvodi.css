@@ -97,9 +97,8 @@
     margin-top: 20px;
   }
   
+  /* Opći stil za gumbe */
   .paginacija button {
-    background-color: #007bff;
-    color: white;
     border: none;
     padding: 10px 15px;
     font-size: 16px;
@@ -108,34 +107,48 @@
     transition: background 0.3s ease;
   }
   
-  .paginacija button:disabled {
+  /* Prethodna i Sljedeća */
+  .paginacija-btn {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .paginacija-btn:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .paginacija-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
   }
   
-  .paginacija button:hover:not(:disabled) {
-    background-color: #0056b3;
-  }
-  
+  /* Stil za brojeve stranica */
   .broj-stranice {
     font-size: 18px;
     font-weight: bold;
-    padding: 5px 10px;
-    background: #f8f9fa;
+    padding: 10px 15px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: none;
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease;
   }
   
-  .broj-stranice:hover {
+  /* AKTIVNA STRANICA -> Siva boja i ne reagira na hover */
+  .broj-stranice.aktivna-stranica {
+    background: #ccc !important;;
+    color: black !important;;
+    cursor: default;
+  }
+  
+  /* OSTALI BROJEVI -> Plavi i imaju hover */
+  .broj-stranice:not(.aktivna-stranica) {
     background: #007bff;
     color: white;
   }
   
-  .aktivna-stranica {
+  .broj-stranice:not(.aktivna-stranica):hover {
     background: #0056b3;
-    color: white;
-    font-weight: bold;
-    pointer-events: none;
   }
+  
+  
+  
