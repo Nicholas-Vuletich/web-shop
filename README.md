@@ -1,6 +1,6 @@
 # Web Shop (Projekt za vježbu) 🛒
 
-Ovo je demo web shop aplikacija napravljena za vježbu i učenje modernih web tehnologija. Cilj projekta je testirati funkcionalnosti autentifikacije, baze podataka i upravljanja proizvodima.
+Ovo je web shop aplikacija napravljena za vježbu i učenje modernih web tehnologija. 
 
 ## 🚀 Korištene tehnologije:
 - **React** 
@@ -11,8 +11,8 @@ Ovo je demo web shop aplikacija napravljena za vježbu i učenje modernih web te
 
 ## 📌 Trenutne funkcionalnosti:
 ✅ Registracija i prijava korisnika  
-✅ Prikaz proizvoda iz Firestore baze podataka  
-✅ Pohrana slika u Firebase Storage  
+✅ Prikaz proizvoda i slika iz Firestore baze podataka i Firestore Storage  
+✅ search bar i paiging. 
 🔜 Planirano: Admin panel sa CRUD funkcionalnostima, checkout, plačanje, prijava preko google-a...  
 
 ---
